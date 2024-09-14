@@ -1,0 +1,20 @@
+{
+  "name": "release-workflow",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A minimal monorepo that uses changesets to manage releases",
+  "keywords": [
+    "Changesets",
+    "Monorepo",
+    "Github Actions"
+  ],
+  "author": "Scott Quested",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scottquested/changesets-monorepo"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@changesets/cli": "^2.27.8"
+  }
+}
