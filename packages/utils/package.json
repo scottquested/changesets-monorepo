@@ -1,10 +1,10 @@
 {
-  "name": "@release-workflow/utils",
+  "name": "@changesets-monorepo/utils",
   "version": "0.1.0",
   "description": "Shared utilities",
   "license": "MIT",
   "devDependencies": {
-    "@release-workflow/eslint-config-custom": "workspace:^0.1.0",
-    "@release-workflow/typescript-config": "workspace:^0.1.0"
+    "@changesets-monorepo/eslint-config-custom": "workspace:^0.1.0",
+    "@changesets-monorepo/typescript-config": "workspace:^0.1.0"
   }
 }
