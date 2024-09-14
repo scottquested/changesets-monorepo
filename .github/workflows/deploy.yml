@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  release:
+    types:
+      - published
+
+env:
+  VERSION: ${{ github.ref_name }}
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploying
+        shell: bash
+        run: |
+          echo "Deploying frontend to production"
+          echo "Version: $VERSION"
+          echo "Deployed at: $(date)"

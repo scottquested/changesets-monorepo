@@ -1,0 +1,7 @@
+{
+  "name": "@release-workflow/eslint-config-custom",
+  "version": "0.1.0",
+  "description": "Shared ESLint configuration",
+  "license": "MIT",
+  "dependencies": {}
+}

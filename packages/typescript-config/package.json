@@ -1,0 +1,6 @@
+{
+  "name": "@release-workflow/typescript-config",
+  "version": "0.1.0",
+  "description": "Shared TypeScript configuration",
+  "license": "MIT"
+}
