@@ -1,14 +1,14 @@
 {
   "name": "@changesets-monorepo/frontend",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Frontend application",
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "@changesets-monorepo/utils": "workspace:^0.1.0"
+    "@changesets-monorepo/utils": "workspace:^1.0.0"
   },
   "devDependencies": {
-    "@changesets-monorepo/eslint-config-custom": "workspace:^0.1.0",
-    "@changesets-monorepo/typescript-config": "workspace:^0.1.0"
+    "@changesets-monorepo/eslint-config-custom": "workspace:^1.0.0",
+    "@changesets-monorepo/typescript-config": "workspace:^1.0.0"
   }
 }
