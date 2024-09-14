@@ -13,14 +13,14 @@ importers:
 
   apps/frontend:
     dependencies:
-      '@release-workflow/utils':
+      '@changesets-monorepo/utils':
         specifier: workspace:^0.1.0
         version: link:../../packages/utils
     devDependencies:
-      '@release-workflow/eslint-config-custom':
+      '@changesets-monorepo/eslint-config-custom':
         specifier: workspace:^0.1.0
         version: link:../../packages/eslint-config-custom
-      '@release-workflow/typescript-config':
+      '@changesets-monorepo/typescript-config':
         specifier: workspace:^0.1.0
         version: link:../../packages/typescript-config
 
@@ -30,10 +30,10 @@ importers:
 
   packages/utils:
     devDependencies:
-      '@release-workflow/eslint-config-custom':
+      '@changesets-monorepo/eslint-config-custom':
         specifier: workspace:^0.1.0
         version: link:../eslint-config-custom
-      '@release-workflow/typescript-config':
+      '@changesets-monorepo/typescript-config':
         specifier: workspace:^0.1.0
         version: link:../typescript-config
 

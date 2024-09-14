@@ -1,5 +1,5 @@
 {
-  "name": "@release-workflow/typescript-config",
+  "name": "@changesets-monorepo/typescript-config",
   "version": "0.1.0",
   "description": "Shared TypeScript configuration",
   "license": "MIT"
