@@ -5,7 +5,8 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "@changesets-monorepo/utils": "workspace:^1.0.0"
+    "@changesets-monorepo/utils": "workspace:^1.0.0",
+    "next": "14.0.0"
   },
   "devDependencies": {
     "@changesets-monorepo/eslint-config-custom": "workspace:^1.0.0",
