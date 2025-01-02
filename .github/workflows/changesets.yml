@@ -24,13 +24,13 @@ jobs:
       - name: pnpm setup
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 9.6.0
 
       - name: Use Node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'pnpm'
+          node-version: "18"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -39,8 +39,8 @@ jobs:
         uses: changesets/action@v1
         id: changesets
         with:
-          commit: 'ci: release'
-          title: 'ci: release'
+          commit: "ci: release"
+          title: "ci: release"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -58,7 +58,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: 'changeset-release/main'
+          ref: "changeset-release/main"
           # We could use a github PAT here if we wanted to trigger another workflow after (e.g. Test, lint etc)
           # token: ${{ secrets.MY_GITHUB_PAT }}
           fetch-depth: 0
@@ -70,8 +70,8 @@ jobs:
       - name: Use Node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'pnpm'
+          node-version: "18"
+          cache: "pnpm"
 
       - name: Update lock file
         run: pnpm install --lockfile-only
@@ -79,11 +79,11 @@ jobs:
       - name: Commit lock file
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'chore: pnpm.lock'
+          commit_message: "chore: pnpm.lock"
           branch: changeset-release/main
           # Override the default commit user and author
           commit_user_name: github-actions[bot]
           commit_user_email: github-actions[bot]@users.noreply.github.com
           commit_author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
           # We only care about commiting the lock file
-          file_pattern: 'pnpm-lock.yaml'
+          file_pattern: "pnpm-lock.yaml"
