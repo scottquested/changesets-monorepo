@@ -28,3 +28,4 @@ jobs:
           repo: ${{ github.event.repository.name }}
           pr-number: ${{ github.event.pull_request.number }}
           token: ${{ secrets.MY_GITHUB_PAT }}
+          package-name: "@changesets-monorepo"
