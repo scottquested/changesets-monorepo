@@ -49,6 +49,8 @@ export async function run(): Promise<void> {
       core.debug(JSON.stringify(pr, null, 4));
       throw new Error("Error fetching PR");
     }
+    console.log(pr.data);
+
     core.debug(`Found PR: '${pr.data.title}'`);
 
     let updates: PackageUpdate[] = [];

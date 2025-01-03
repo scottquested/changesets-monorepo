@@ -29983,6 +29983,7 @@ async function run() {
             core.debug(JSON.stringify(pr, null, 4));
             throw new Error("Error fetching PR");
         }
+        console.log(pr.data);
         core.debug(`Found PR: '${pr.data.title}'`);
         let updates = [];
         if ((0, utils_1.isGroupedPR)(pr.data.title)) {
