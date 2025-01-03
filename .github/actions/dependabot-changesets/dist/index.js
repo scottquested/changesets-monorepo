@@ -29979,7 +29979,7 @@ async function run() {
             repo,
             pull_number: Number(prNumber),
         });
-        const prFiles = await octokit.rest.pulls.listFiles({
+        const listFiles = await octokit.rest.pulls.listFiles({
             owner,
             repo,
             pull_number: Number(prNumber),
@@ -29988,13 +29988,23 @@ async function run() {
             core.debug(JSON.stringify(pr, null, 4));
             throw new Error("Error fetching PR");
         }
-        prFiles.data.forEach((file) => {
+        let packageFiles = [];
+        listFiles.data.forEach(async (file) => {
             if (file.filename.includes("package.json")) {
-                core.info("package.json file modified in PR");
-                core.info("path is: " + file.filename);
-                core.info("patch is: " + file.patch);
+                const rawUrl = await fetch(file.raw_url);
+                const packageJson = await rawUrl.json();
+                // Error handling
+                if (packageJson.error) {
+                    throw new Error(`Error fetching package.json: ${packageJson.error}`);
+                }
+                packageFiles.push({
+                    filename: file.filename,
+                    patch: file.patch,
+                    rawUrl: packageJson.name,
+                });
             }
         });
+        core.info(JSON.stringify(packageFiles, null, 4));
         core.debug(`Found PR: '${pr.data.title}'`);
         let updates = [];
         if ((0, utils_1.isGroupedPR)(pr.data.title)) {
