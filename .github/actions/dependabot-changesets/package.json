@@ -11,10 +11,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "bundle": "npm run format:write && npm run package",
     "package": "ncc build src/index.ts --license licenses.txt",
-    "package:watch": "npm run package -- --watch",
-    "all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package"
+    "package:watch": "npm run package -- --watch"
   },
   "license": "MIT",
   "dependencies": {
