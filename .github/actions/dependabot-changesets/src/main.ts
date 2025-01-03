@@ -46,23 +46,48 @@ export async function run(): Promise<void> {
       pull_number: Number(prNumber),
     });
 
-    const prFiles = await octokit.rest.pulls.listFiles({
-      owner,
-      repo,
-      pull_number: Number(prNumber),
-    });
     if (pr.status !== 200) {
       core.debug(JSON.stringify(pr, null, 4));
       throw new Error("Error fetching PR");
     }
 
-    prFiles.data.forEach((file) => {
-      if (file.filename.includes("package.json")) {
-        core.info("package.json file modified in PR");
-        core.info("path is: " + file.filename);
-        core.info("patch is: " + file.patch);
-      }
+    const listFiles = await octokit.rest.pulls.listFiles({
+      owner,
+      repo,
+      pull_number: Number(prNumber),
     });
+
+    let packageFiles: {
+      filename: string;
+      patch?: string;
+      rawUrl: string;
+    }[] = [];
+
+    for await (const file of listFiles.data) {
+      if (file.filename.includes("package.json")) {
+        const packageJson = await octokit.rest.repos.getContent({
+          owner,
+          repo,
+          path: file.filename,
+        });
+
+        const content = Buffer.from(
+          (packageJson.data as { content: string }).content,
+          "base64"
+        ).toString();
+
+        core.info(content);
+        core.info(JSON.stringify(packageJson, null, 4));
+
+        packageFiles.push({
+          filename: file.filename,
+          patch: file.patch,
+          rawUrl: content,
+        });
+      }
+    }
+
+    core.info(JSON.stringify(packageFiles, null, 4));
 
     core.debug(`Found PR: '${pr.data.title}'`);
 
