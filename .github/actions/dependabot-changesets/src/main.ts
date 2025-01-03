@@ -45,11 +45,17 @@ export async function run(): Promise<void> {
       repo,
       pull_number: Number(prNumber),
     });
+
+    const prFiles = await octokit.rest.pulls.listFiles({
+      owner,
+      repo,
+      pull_number: Number(prNumber),
+    });
     if (pr.status !== 200) {
       core.debug(JSON.stringify(pr, null, 4));
       throw new Error("Error fetching PR");
     }
-    console.log(pr.data);
+    console.log(prFiles);
 
     core.debug(`Found PR: '${pr.data.title}'`);
 
