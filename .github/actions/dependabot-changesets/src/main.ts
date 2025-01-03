@@ -55,7 +55,14 @@ export async function run(): Promise<void> {
       core.debug(JSON.stringify(pr, null, 4));
       throw new Error("Error fetching PR");
     }
-    console.log(prFiles);
+
+    prFiles.data.forEach((file) => {
+      if (file.filename.includes("package.json")) {
+        core.info("package.json file modified in PR");
+        core.info("path is: " + file.filename);
+        core.info("patch is: " + file.patch);
+      }
+    });
 
     core.debug(`Found PR: '${pr.data.title}'`);
 
@@ -93,7 +100,7 @@ export async function run(): Promise<void> {
 
     let newUpdates = 0;
     for (const update of updates) {
-      console.log(update);
+      console.log(update.package);
 
       const changesetName = getChangesetName(update.package);
       const changesetPath = `.changeset/${changesetName}`;
