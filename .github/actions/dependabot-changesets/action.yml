@@ -1,0 +1,42 @@
+name: 'Dependabot Changesets'
+description: Github action to generate and commit changesets for dependabot PRs, grouped or ungrouped
+author: StafflinePeoplePlus
+
+# Add your action's branding here. This will appear on the GitHub Marketplace.
+branding:
+  icon: 'box'
+  color: 'blue'
+
+# Define your inputs here.
+inputs:
+  owner:
+    description: 'The owner of the repository'
+    required: true
+  repo:
+    description: 'The name of the repository'
+    required: true
+  pr-number:
+    description: 'The number of the pull request'
+    required: true
+  token:
+    description: 'The token to use to access the GitHub API'
+    required: true
+  package-name:
+    description: 'Name of the package to generate the changeset for, defaults to the repo name'
+    required: false
+  update-type:
+    description: 'Type of update to generate the changeset for, defaults to "patch"'
+    required: false
+    default: patch
+  git-user:
+    description: 'Username to use for git commits, defaults to "dependabot[bot]"'
+    required: false
+    default: dependabot[bot]
+  git-email:
+    description: 'Email to use for git commits, defaults to "49699333+dependabot[bot]@users.noreply.github.com"'
+    required: false
+    default: 49699333+dependabot[bot]@users.noreply.github.com
+
+runs:
+  using: node20
+  main: ./dist/index.js
