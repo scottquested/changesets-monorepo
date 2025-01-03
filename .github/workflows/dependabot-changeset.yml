@@ -22,7 +22,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ secrets.MY_GITHUB_PAT }}
       - name: Update PR
-        uses: ./.github/actions/dependabot-changesets/
+        uses: ./.github/actions/dependabot-changesets@main
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
