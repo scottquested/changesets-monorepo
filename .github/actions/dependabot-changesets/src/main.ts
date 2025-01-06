@@ -51,6 +51,11 @@ export async function run(): Promise<void> {
       throw new Error("Error fetching PR");
     }
 
+    if (pr.status !== 200) {
+      core.debug(JSON.stringify(pr, null, 4));
+      throw new Error("Error fetching PR");
+    }
+
     const listFiles = await octokit.rest.pulls.listFiles({
       owner,
       repo,
@@ -63,7 +68,7 @@ export async function run(): Promise<void> {
       // rawUrl: string;
     }[] = [];
 
-    listFiles.data.forEach(async (file) => {
+    for await (const file of listFiles.data) {
       if (file.filename.includes("package.json")) {
         const packageJson = await octokit.rest.repos.getContent({
           owner,
@@ -71,15 +76,21 @@ export async function run(): Promise<void> {
           path: file.filename,
         });
 
+        const content = Buffer.from(
+          (packageJson.data as { content: string }).content,
+          "base64"
+        ).toString();
+
+        core.info(content);
         core.info(JSON.stringify(packageJson, null, 4));
 
         packageFiles.push({
           filename: file.filename,
           patch: file.patch,
-          // rawUrl: packageJson,
+          rawUrl: content,
         });
       }
-    });
+    }
 
     core.info(JSON.stringify(packageFiles, null, 4));
 
