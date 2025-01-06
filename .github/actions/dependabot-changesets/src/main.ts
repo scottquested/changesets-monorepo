@@ -51,6 +51,11 @@ export async function run(): Promise<void> {
       throw new Error("Error fetching PR");
     }
 
+    if (pr.status !== 200) {
+      core.debug(JSON.stringify(pr, null, 4));
+      throw new Error("Error fetching PR");
+    }
+
     const listFiles = await octokit.rest.pulls.listFiles({
       owner,
       repo,
@@ -60,7 +65,7 @@ export async function run(): Promise<void> {
     let packageFiles: {
       filename: string;
       patch?: string;
-      rawUrl: string;
+      // rawUrl: string;
     }[] = [];
 
     for await (const file of listFiles.data) {
