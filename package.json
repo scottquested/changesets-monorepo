@@ -15,7 +15,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@changesets/cli": "^2.27.8"
+    "@changesets/cli": "^2.27.12"
   },
   "packageManager": "pnpm@9.6.0"
 }
